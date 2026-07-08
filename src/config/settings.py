@@ -21,6 +21,18 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 # Landing zone for raw datasets
 RAW_DATA_PATH = PROJECT_ROOT / "data" / "raw"
 
+# =============================================================================
+# Medallion Architecture Paths
+# =============================================================================
+
+# Bronze layer
+BRONZE_DATA_PATH = PROJECT_ROOT / "data" / "bronze"
+
+# Silver layer
+SILVER_DATA_PATH = PROJECT_ROOT / "data" / "silver"
+
+# Gold layer
+GOLD_DATA_PATH = PROJECT_ROOT / "data" / "gold"
 
 # =============================================================================
 # Dataset Configuration
