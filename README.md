@@ -3,12 +3,12 @@
 > End-to-end Data Engineering platform for credit risk analytics using Medallion Architecture, data quality, governance practices and analytics-ready datasets.
 
 ![Status](https://img.shields.io/badge/status-under%20development-yellow)
-![Python](https://img.shields.io/badge/python-3.x-blue)
+![Python](https://img.shields.io/badge/python-3.12+-blue)
 ![Tests](https://img.shields.io/badge/tests-30%20passing-brightgreen)
 
 ---
 
-## 📌 Project Status
+# 📌 Project Status
 
 🚧 **Under development**
 
@@ -27,33 +27,54 @@
 
 ---
 
-## 📖 Overview
+# 📖 Overview
 
-This project builds a data platform for the fictional fintech **Data Girls Finance**, using the Kaggle Credit Score Classification dataset.
+This project simulates a production-grade Data Engineering platform built for the fictional fintech **Data Girls Finance**.
 
-The platform follows:
+Using the Kaggle **Credit Score Classification** dataset, the platform ingests, validates, transforms and prepares credit data for analytics following modern Data Engineering best practices.
 
-- 🏗️ Medallion Architecture
-- ✅ Data Quality practices
-- 🛡️ Data Governance principles
-- 🇧🇷 LGPD-aware handling
-- 📐 Dimensional Modeling
-- ⚙️ Automated orchestration
-- 💻 Local-first and free execution
+The solution is designed to be:
+
+- 🏗️ Based on Medallion Architecture
+- ✅ Quality-driven
+- 🛡️ LGPD-aware
+- 📊 Analytics-ready
+- ⚙️ Fully automated
+- 💻 Local-first and free to execute
 
 ---
 
-## 🧰 Current Tech Stack
+# ✨ Features
+
+- ✅ Automated dataset ingestion through the Kaggle API
+- ✅ Automatic Kaggle credential discovery (Windows, Linux, macOS and WSL)
+- ✅ Reproducible local execution
+- ✅ Medallion Architecture (Raw → Bronze → Silver → Gold)
+- ✅ Parquet-based storage
+- ✅ Schema-driven validation
+- ✅ Data quality checks
+- ✅ LGPD-aware transformations
+- ✅ Unit tested pipeline
+- 🚧 Gold analytics layer
+- 🚧 Apache Airflow orchestration
+- 🚧 Docker deployment
+- 🚧 Power BI dashboard
+
+---
+
+# 🧰 Tech Stack
+
+## Current
 
 - Python
 - Pandas
-- Parquet
 - PyArrow
+- Parquet
 - Kaggle API
 - Pytest
 - Power BI Desktop
 
-## 🔮 Planned Tech Stack
+## Planned
 
 - Docker
 - Apache Airflow
@@ -63,36 +84,50 @@ The platform follows:
 
 ---
 
-## 🏗️ Architecture
+# 🏗️ Architecture
 
 ```mermaid
 flowchart TD
-    A[("🌐 KAGGLE DATASET")] --> B["📁 Raw Layer"]
-    B --> C["🥉 BRONZE LAYER"]
-    C --> D["🥈 SILVER LAYER"]
-    D --> E["🥇 GOLD LAYER"]
-    E --> F["📊 POWER BI"]
+
+    A[🌐 Kaggle API]
+    B[🔐 Authentication]
+    C[📥 Ingestion]
+    D[📁 Raw Layer]
+    E[🥉 Bronze Layer]
+    F[🥈 Silver Layer]
+    G[🥇 Gold Layer]
+    H[📊 Power BI]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> H
 
     style A fill:#4A90D9,stroke:#2E5C8A,color:#fff
-    style B fill:#B0B0B0,stroke:#7A7A7A,color:#fff
-    style C fill:#CD7F32,stroke:#8B5A2B,color:#fff
-    style D fill:#C0C0C0,stroke:#8A8A8A,color:#000
-    style E fill:#FFD700,stroke:#B8960C,color:#000
-    style F fill:#F2C811,stroke:#B8960C,color:#000
+    style B fill:#5C6BC0,stroke:#3949AB,color:#fff
+    style C fill:#7E57C2,stroke:#5E35B1,color:#fff
+    style D fill:#B0B0B0,stroke:#7A7A7A,color:#fff
+    style E fill:#CD7F32,stroke:#8B5A2B,color:#fff
+    style F fill:#C0C0C0,stroke:#8A8A8A,color:#000
+    style G fill:#FFD700,stroke:#B8960C,color:#000
+    style H fill:#F2C811,stroke:#B8960C,color:#000
 ```
 
-### Layer Responsibilities
+## Layer Responsibilities
 
 | Layer | Responsibility |
 | --- | --- |
-| **Raw** | Stores the original downloaded dataset files. |
-| **Bronze** | Preserves raw data in Parquet format without cleaning or typing. |
-| **Silver** | Produces trusted data with standardized names, cleaned values, typed columns, LGPD handling and schema validation. |
-| **Gold** | Will provide analytics-ready tables and business metrics for Power BI. |
+| Raw | Stores the original files downloaded from the Kaggle API. |
+| Bronze | Preserves immutable raw data in Parquet format. |
+| Silver | Produces trusted, validated and standardized datasets. |
+| Gold | Produces analytics-ready dimensional models and business metrics. |
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```text
 credit-score-data-platform/
@@ -123,109 +158,291 @@ credit-score-data-platform/
 
 ---
 
-## 🚀 Implemented Pipelines
+# 📋 Prerequisites
 
-### 1️⃣ Ingestion
+- Python 3.12+
+- Git
+- Kaggle account
+- Kaggle API credentials
+
+---
+
+# 🚀 Quick Start
+
+## Clone the repository
+
+```bash
+git clone https://github.com/<your-user>/credit-score-data-platform.git
+
+cd credit-score-data-platform
+```
+
+## Create a virtual environment
+
+### Linux / macOS
+
+```bash
+python -m venv .venv
+
+source .venv/bin/activate
+```
+
+### Windows
+
+```powershell
+python -m venv .venv
+
+.venv\Scripts\activate
+```
+
+## Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# 🔐 Kaggle API Authentication
+
+The ingestion pipeline downloads the dataset directly from the official **Kaggle API**.
+
+Manual downloads are **not required**.
+
+A free Kaggle account is required.
+
+## Generate your API credentials
+
+1. Sign in to Kaggle.
+2. Open **Account Settings**.
+3. Under **API**, click **Create New Token**.
+4. Kaggle will download a file named:
+
+```text
+kaggle.json
+```
+
+> Never commit this file to the repository.
+
+---
+
+## Linux / macOS
+
+Move the credential file to:
+
+```text
+~/.kaggle/kaggle.json
+```
+
+Set secure permissions:
+
+```bash
+chmod 600 ~/.kaggle/kaggle.json
+```
+
+---
+
+## Windows
+
+Place the downloaded file at:
+
+```text
+C:\Users\<your-user>\.kaggle\kaggle.json
+```
+
+---
+
+## Windows Subsystem for Linux (WSL)
+
+This project automatically supports WSL.
+
+When the ingestion pipeline runs:
+
+1. It checks for credentials at:
+
+```text
+~/.kaggle/kaggle.json
+```
+
+2. If none are found, it automatically searches Windows user profiles for:
+
+```text
+C:\Users\<your-user>\.kaggle\kaggle.json
+```
+
+3. When exactly one valid credential file is found, it is securely copied into the WSL environment with restricted permissions.
+
+No manual copy is required.
+
+---
+
+# 🚀 Reproducible Pipeline
+
+After configuring Kaggle credentials, execute the entire pipeline locally.
+
+## Download the source dataset
 
 ```bash
 python -m src.ingestion.downloader
 ```
 
-Downloads the Kaggle dataset into the Raw layer and generates extraction metadata.
+Downloads the dataset directly from the Kaggle API into the Raw layer.
 
-### 2️⃣ Bronze Layer
+---
+
+## Build the Bronze Layer
 
 ```bash
 python -m src.processing.bronze.bronze_loader
 ```
 
-Converts raw CSV files into Bronze Parquet files while preserving all values as strings.
+Creates immutable Bronze Parquet files while preserving every value exactly as received.
 
-### 3️⃣ Silver Layer
+---
+
+## Build the Silver Layer
 
 ```bash
 python -m src.processing.silver.silver_loader
 ```
 
-Builds trusted Silver datasets by applying:
+Builds trusted datasets by applying:
 
-- Column name standardization
+- Column standardization
 - Invalid value replacement
-- Numeric text cleaning
-- PII removal
+- Numeric cleaning
+- LGPD-aware handling
 - Type conversion
 - Schema validation
-- Range validation
+- Business rule validation
 
 ---
 
-## ✅ Tests
-
-Run unit tests:
+## Run automated tests
 
 ```bash
-pytest tests/unit -v
+pytest
 ```
 
-**Current test coverage:**
+---
+
+# 🔄 Data Flow
+
+| Stage | Input | Output |
+| --- | --- | --- |
+| Ingestion | Kaggle API | Raw CSV |
+| Bronze | Raw CSV | Bronze Parquet |
+| Silver | Bronze Parquet | Trusted Parquet |
+| Gold | Silver Parquet | Analytics Tables |
+
+---
+
+# 🛡️ Data Quality
+
+The Silver layer automatically validates data before promoting it to the trusted zone.
+
+Current validations include:
+
+- ✅ Required columns
+- ✅ Optional columns
+- ✅ Data types
+- ✅ Missing values
+- ✅ Numeric ranges
+- ✅ Allowed categorical values
+- ✅ Invalid value replacement
+- ✅ Schema enforcement
+- ✅ LGPD-aware PII removal
+
+---
+
+# ✅ Tests
+
+Run the automated test suite:
+
+```bash
+pytest
+```
+
+Current coverage includes:
 
 - Bronze loader
 - Silver cleaning
 - Silver typing
-- Silver validator
+- Silver validation
 
-**Current status:** 30 passing tests ✅
+**Current status**
+
+✅ 30 passing tests
 
 ---
 
-## 🧠 Key Architecture Decisions
+# 🧠 Key Architecture Decisions
 
-### Bronze Layer
+## Bronze Layer
 
-The Bronze layer preserves raw data exactly as received.
+The Bronze layer preserves the original dataset exactly as received.
 
-It does **not**:
+It intentionally does **not**:
 
 - ❌ Clean data
-- ❌ Convert types
+- ❌ Convert data types
 - ❌ Validate business rules
-- ❌ Remove sensitive fields
+- ❌ Remove sensitive information
 
-### Silver Layer
+---
 
-The Silver layer is the trusted data layer.
+## Silver Layer
 
-It is responsible for:
+The Silver layer represents the trusted data zone.
 
-- 🧹 Cleaning invalid values
-- 🛡️ Applying LGPD-aware handling
-- 🔢 Converting data types
-- 📐 Validating schema rules
-- 🥇 Preparing data for Gold analytics
+Responsibilities include:
 
-### Schema-Driven Silver
+- 🧹 Data cleaning
+- 🛡️ LGPD-aware transformations
+- 🔢 Type conversion
+- 📐 Schema validation
+- ✅ Business rule validation
+- 🥇 Preparing data for Gold
 
-The Silver layer uses a declarative schema as a single source of truth for:
+---
+
+## Schema-Driven Validation
+
+The Silver layer uses a declarative schema as the single source of truth for:
 
 - Expected columns
-- Required and optional columns
+- Required columns
+- Optional columns
 - Data types
-- Allowed values
 - Nullable rules
+- Allowed values
 - Numeric ranges
 
 ---
 
-## 🗺️ Roadmap
+# 🗺️ Roadmap
 
-`████████████████░░░░░░░░░░░░░░` **4/9 concluído**
+`████████████████░░░░░░░░░░░░░░` **4/9 completed**
 
 - [x] Project bootstrap
 - [x] Data ingestion
 - [x] Bronze layer
 - [x] Silver layer
 - [ ] Gold layer
-- [ ] Docker setup
-- [ ] Airflow orchestration
-- [ ] Power BI dashboard
+- [ ] Docker
+- [ ] Airflow
+- [ ] Power BI
 - [ ] Final documentation
+
+---
+
+# 🚀 Future Improvements
+
+- Docker Compose
+- Apache Airflow scheduling
+- CI/CD pipeline
+- Data lineage
+- Data catalog
+- Great Expectations integration
+- dbt models
+- Cloud deployment
