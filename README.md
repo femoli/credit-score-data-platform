@@ -1,14 +1,16 @@
+<a id="top"></a>
+
 # 🏦 Credit Score Data Platform
 
-<p align="center"> 
+<p align="center">
   <img src="docs/images/credit-score-banner.png" alt="Credit Score Data Platform Banner" width="100%">
 </p>
 
-<p align="center"> 
-  ![Architecture](https://img.shields.io/badge/Architecture-Medallion-blueviolet?style=for-the-badge)
-  ![Status](https://img.shields.io/badge/Status-%20Development-orange?style=for-the-badge)
-  ![Python](https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge&logo=python&logoColor=white)
-  ![Pytest](https://img.shields.io/badge/Tests-44%20Passing-success?style=for-the-badge)
+<p align="center">
+  <img src="https://img.shields.io/badge/Architecture-Medallion-blueviolet?style=for-the-badge" alt="Architecture">
+  <img src="https://img.shields.io/badge/Status-In%20Development-orange?style=for-the-badge" alt="Status">
+  <img src="https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Tests-51%20Passing-success?style=for-the-badge&logo=pytest&logoColor=white" alt="Tests">
 </p>
 
 ---
@@ -28,29 +30,34 @@ The objective is to simulate a real production-grade data platform capable of:
 
 Rather than focusing only on ETL scripts, this repository follows engineering best practices commonly adopted in modern Data Platform teams.
 
----
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
 
 ## 📑 Table of Contents
 
-- [✨ Highlights](#-highlights)
-- [🏗 Architecture](#-architecture)
-- [🧩 Data Model](#-data-model)
-- [📂 Project Structure](#-project-structure)
-- [⚙️ Tech Stack](#️-tech-stack)
-- [🚀 Getting Started](#-getting-started)
-- [📥 Data Ingestion](#-data-ingestion)
-- [▶ Running the Pipeline](#-running-the-pipeline)
-- [✅ Running Tests](#-running-tests)
-- [📚 Documentation](#-documentation)
-- [💡 Why This Project?](#-why-this-project)
-- [🚀 Future Improvements](#-future-improvements)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
-- [🛸 About the Author](#-about-the-author)
+- [✨ Highlights](#highlights)
+- [🏗 Architecture](#architecture)
+- [🧩 Data Model](#data-model)
+- [🚀 Project Progress](#project-progress)
+- [📂 Project Structure](#project-structure)
+- [⚙️ Tech Stack](#tech-stack)
+- [🚀 Getting Started](#getting-started)
+- [📥 Data Ingestion](#data-ingestion)
+- [▶ Running the Pipeline](#running-the-pipeline)
+- [✅ Running Tests](#running-tests)
+- [📚 Documentation](#documentation)
+- [💡 Why This Project?](#why-this-project)
+- [🚀 Future Improvements](#future-improvements)
+- [🤝 Contributing](#contributing)
+- [📄 License](#license)
+- [🛸 About the Author](#about-the-author)
 
----
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
 
-## ✨ Highlights
+# ✨ Highlights
 
 - Medallion Architecture (Bronze / Silver / Gold)
 - Data Quality Validation
@@ -63,37 +70,37 @@ Rather than focusing only on ETL scripts, this repository follows engineering be
 - Professional project documentation
 - Designed with scalability in mind
 
----
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
 
 # 🏗 Architecture
 
 <p align="center">
-<img src="docs/images/data-plataform-diagram.png" width="100%">
+  <img src="docs/images/data-plataform-diagram.png" width="100%">
 </p>
 
-The platform follows the Medallion Architecture:
+### Medallion Layers
 
-| Layer | Purpose |
-| --------- | --------- |
-| Bronze | Raw immutable ingestion |
-| Silver | Cleaned, standardized and validated data |
-| Gold | Business-ready analytical datasets |
+| Layer | Description |
+| ------- | ------------- |
+| 🥉 Bronze | Raw immutable ingestion |
+| 🥈 Silver | Cleaned, standardized and validated datasets |
+| 🥇 Gold | Analytics-ready datasets optimized for business consumption |
 
-More architectural details are available in:
-
-> 📄 **docs/architecture/architecture.md**
-
----
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
 
 # 🧩 Data Model
 
 <p align="center">
-<img src="docs/images/data-model.png" width="90%">
+  <img src="docs/images/data-model.png" width="90%">
 </p>
 
-The data model illustrates how the curated analytical dataset is organized after the transformation process.
-
----
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
 
 # 🚀 Project Progress
 
@@ -102,7 +109,7 @@ The data model illustrates how the curated analytical dataset is organized after
 `███████░░░░░░░` **68%**
 
 | Stage | Progress |
-|--------|:--------:|
+| -------- | -------- |
 | Project Bootstrap | ██████████ 100% |
 | Data Ingestion | ██████████ 100% |
 | Bronze Layer | ██████████ 100% |
@@ -113,46 +120,48 @@ The data model illustrates how the curated analytical dataset is organized after
 | CI/CD | ░░░░░░░░░░ 0% |
 | Documentation | ██████░░░░ 60% |
 
----
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
 
 # 📂 Project Structure
 
 ```text
 credit-score-data-platform/
 │
-├── .github/                 # GitHub Actions and templates
+├── .github/
 │   ├── workflows/
 │   ├── ISSUE_TEMPLATE/
 │   └── PULL_REQUEST_TEMPLATE.md
 │
-├── dags/                    # Future orchestration workflows
+├── dags/
 │
-├── dashboard/               # BI dashboards
+├── dashboard/
 │
 ├── data/
-│   ├── raw/                 # Original datasets from Kaggle
-│   ├── bronze/              # Raw Parquet datasets
-│   ├── silver/              # Cleaned and validated datasets
-│   ├── gold/                # Analytics-ready datasets
-│   └── reports/             # Generated reports
+│   ├── raw/
+│   ├── bronze/
+│   ├── silver/
+│   ├── gold/
+│   └── reports/
 │
 ├── docs/
-│   ├── architecture/        # Architecture documentation
-│   ├── adr/                 # Architecture Decision Records
-│   ├── governance/          # Governance documentation
-│   └── images/              # README assets
+│   ├── architecture/
+│   ├── adr/
+│   ├── governance/
+│   └── images/
 │
-├── notebooks/               # Exploratory analysis
+├── notebooks/
 │
 ├── src/
-│   ├── config/              # Application configuration
-│   ├── ingestion/           # Kaggle ingestion pipeline
-│   ├── observability/       # Logging utilities
+│   ├── config/
+│   ├── ingestion/
+│   ├── observability/
 │   ├── processing/
 │   │   ├── bronze/
 │   │   ├── silver/
 │   │   └── gold/
-│   └── utils/               # Shared utilities
+│   └── utils/
 │
 ├── tests/
 │   ├── unit/
@@ -171,7 +180,9 @@ credit-score-data-platform/
 └── requirements-dev.txt
 ```
 
----
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
 
 # ⚙️ Tech Stack
 
@@ -185,7 +196,9 @@ credit-score-data-platform/
 - 🌿 **Git & GitHub** — Version control and collaboration
 - 🏗️ **Medallion Architecture** — Data platform architecture pattern
 
----
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
 
 # 🚀 Getting Started
 
@@ -197,25 +210,21 @@ git clone git@github.com:femoli/credit-score-data-platform.git
 cd credit-score-data-platform
 ```
 
----
-
 ## Create virtual environment
 
-Linux / macOS
+### Linux / macOS
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 ```
 
-Windows
+### Windows
 
 ```powershell
 python -m venv .venv
 .venv\Scripts\activate
 ```
-
----
 
 ## Install dependencies
 
@@ -223,7 +232,9 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
----
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
 
 # 📥 Data Ingestion
 
@@ -237,13 +248,13 @@ Before running the ingestion pipeline, you must configure your Kaggle API creden
 2. Generate your API token (`kaggle.json`).
 3. Place the file in the default Kaggle directory.
 
-**Linux / macOS**
+### Linux / macOS
 
 ```text
 ~/.kaggle/kaggle.json
 ```
 
-**Windows**
+### Windows
 
 ```text
 C:\Users\<username>\.kaggle\kaggle.json
@@ -253,7 +264,9 @@ For more information, see the official Kaggle [API documentation](https://www.ka
 
 To learn more about the source data, visit the [Credit Score Classification dataset](https://www.kaggle.com/datasets/parisrohan/credit-score-classification).
 
----
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
 
 # ▶ Running the Pipeline
 
@@ -281,7 +294,9 @@ python -m src.processing.silver.silver_loader
 python -m src.processing.gold.gold_loader
 ```
 
----
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
 
 # ✅ Running Tests
 
@@ -291,21 +306,25 @@ Execute all tests:
 pytest
 ```
 
-Example output
+Example output:
 
 ```text
 =================================
-44 passed
+51 passed
 =================================
 ```
 
----
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
 
 # 📚 Documentation
 
 Detailed technical documentation is currently being prepared and will be available in the `docs/` directory in future iterations of the project.
 
----
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
 
 # 💡 Why This Project?
 
@@ -325,8 +344,6 @@ The main objective is to demonstrate practical knowledge in:
 - Project Organization
 - Engineering Best Practices
 
----
-
 ### 💜 About @DataGirls
 
 Data Girls is a non-profit community dedicated to empowering women through education, mentorship, networking, and collaboration.
@@ -335,14 +352,14 @@ This bootcamp is a **100% volunteer-driven initiative** created to promote **acc
 
 You can learn more about this incredible initiative [here](https://linktr.ee/DataGirls).
 
----
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
 
 # 🚀 Future Improvements
 
-The following enhancements are planned for future iterations of the platform:
-
 | Feature | Status |
-|---------|:------:|
+| ----------| ------ |
 | ⚙️ CI/CD with GitHub Actions | 🚧 In Progress |
 | 🐳 Docker containerization | 🚧 In Progress |
 | ☁️ AWS-native deployment | 🔍 Research |
@@ -354,15 +371,19 @@ The following enhancements are planned for future iterations of the platform:
 | 🔍 Data lineage | 📝 Planned |
 | ✅ Automated data quality reports | 📝 Planned |
 
----
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
 
 # 🤝 Contributing
 
-Contributions, suggestions and improvements are welcome.
+Contributions, suggestions, and improvements are welcome.
 
 Feel free to open an Issue or submit a Pull Request.
 
----
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
 
 # 📄 License
 
@@ -370,16 +391,29 @@ This project is licensed under the MIT License.
 
 See the **LICENSE** file for more information.
 
----
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
 
 # 🛸 About the Author
 
-<p><i>I kinda like messy datasets and clean pipelines.<br>
-Big data, ETL, and cloud migrations by day — probably overthinking a JOIN by night.</i></p>
+<p>
+<i>
+I kinda like messy datasets and clean pipelines.<br>
+Big data, ETL, and cloud migrations by day — probably overthinking a JOIN by night.
+</i>
+</p>
 
 <p>
   <a href="https://github.com/femoli">
-    <img src="docs/images/avatar.png" alt="Author Avatar" width="170" style="border-radius:50%;">
+    <img src="docs/images/avatar.png" alt="Fernanda Oliveira" width="170" style="border-radius:50%;">
   </a>
 </p>
-<p>Made with 🖤 and lots of 🍵 by <strong>Fernanda Oliveira</strong></p>
+
+<p>
+Made with 🖤 and lots of 🍵 by <strong>Fernanda Oliveira</strong>
+</p>
+
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
