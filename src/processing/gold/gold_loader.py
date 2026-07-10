@@ -1,8 +1,8 @@
 """
 Gold layer loader.
 
-Reads Silver Parquet files, builds dimensional tables and writes them
-to the Gold layer.
+Reads Silver Parquet files, builds dimensional tables and fact table,
+then writes them to the Gold layer.
 """
 
 from pathlib import Path
@@ -13,9 +13,11 @@ from src.config.settings import GOLD_DATA_PATH, SILVER_DATA_PATH
 from src.observability.logger import get_logger
 from src.processing.gold.dimensions import (
     build_credit_score_dimension,
+    build_customer_dimension,
     build_date_dimension,
     build_occupation_dimension,
 )
+from src.processing.gold.facts import build_credit_profile_fact
 
 # =============================================================================
 # Constants
@@ -61,6 +63,7 @@ def build_gold_dimensions(
 ) -> dict[str, pd.DataFrame]:
     """Build all Gold dimensions."""
     return {
+        "dim_customer": build_customer_dimension(dataframe),
         "dim_occupation": build_occupation_dimension(dataframe),
         "dim_credit_score": build_credit_score_dimension(dataframe),
         "dim_date": build_date_dimension(dataframe),
@@ -71,13 +74,21 @@ def load_parquet_to_gold(
     parquet_file_path: Path,
     gold_data_path: Path = GOLD_DATA_PATH,
 ) -> Path:
-    """Load a Silver Parquet file and create Gold dimensions."""
+    """Load a Silver Parquet file and create Gold datasets."""
 
     logger.info("Reading Silver file: %s", parquet_file_path)
 
     dataframe = pd.read_parquet(parquet_file_path)
 
     dimensions = build_gold_dimensions(dataframe)
+
+    fact = build_credit_profile_fact(
+        dataframe=dataframe,
+        customer_dimension=dimensions["dim_customer"],
+        occupation_dimension=dimensions["dim_occupation"],
+        credit_score_dimension=dimensions["dim_credit_score"],
+        date_dimension=dimensions["dim_date"],
+    )
 
     output_directory = gold_data_path / parquet_file_path.stem
     output_directory.mkdir(parents=True, exist_ok=True)
@@ -96,6 +107,20 @@ def load_parquet_to_gold(
             dimension_name,
             output_file,
         )
+
+    fact_output_file = (
+        output_directory / "fact_credit_profile.parquet"
+    )
+
+    fact.to_parquet(
+        fact_output_file,
+        index=False,
+    )
+
+    logger.info(
+        "fact_credit_profile created: %s",
+        fact_output_file,
+    )
 
     return output_directory
 

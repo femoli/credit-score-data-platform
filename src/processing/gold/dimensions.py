@@ -8,6 +8,12 @@ building the dimensional tables used by the Gold layer star schema.
 import pandas as pd
 
 
+REQUIRED_CUSTOMER_COLUMNS = {
+    "customer_id",
+    "age",
+    "annual_income",
+}
+
 REQUIRED_OCCUPATION_COLUMNS = {"occupation"}
 REQUIRED_CREDIT_SCORE_COLUMNS = {"credit_score"}
 REQUIRED_DATE_COLUMNS = {"month"}
@@ -48,9 +54,7 @@ def _validate_required_columns(
     required_columns: set[str],
     dimension_name: str,
 ) -> None:
-    """
-    Validate whether the source DataFrame contains all required columns.
-    """
+    """Validate whether the source DataFrame contains all required columns."""
     missing_columns = required_columns - set(dataframe.columns)
 
     if missing_columns:
@@ -60,12 +64,42 @@ def _validate_required_columns(
         )
 
 
+def build_customer_dimension(
+    dataframe: pd.DataFrame,
+) -> pd.DataFrame:
+    """Build the customer dimension."""
+    _validate_required_columns(
+        dataframe=dataframe,
+        required_columns=REQUIRED_CUSTOMER_COLUMNS,
+        dimension_name="customer dimension",
+    )
+
+    dimension = (
+        dataframe[
+            [
+                "customer_id",
+                "age",
+                "annual_income",
+            ]
+        ]
+        .sort_values("customer_id")
+        .groupby("customer_id", as_index=False)
+        .first()
+    )
+
+    dimension.insert(
+        0,
+        "customer_key",
+        range(1, len(dimension) + 1),
+    )
+
+    return dimension
+
+
 def build_occupation_dimension(
     dataframe: pd.DataFrame,
 ) -> pd.DataFrame:
-    """
-    Build the occupation dimension.
-    """
+    """Build the occupation dimension."""
     _validate_required_columns(
         dataframe=dataframe,
         required_columns=REQUIRED_OCCUPATION_COLUMNS,
@@ -92,9 +126,7 @@ def build_occupation_dimension(
 def build_credit_score_dimension(
     dataframe: pd.DataFrame,
 ) -> pd.DataFrame:
-    """
-    Build the credit score dimension.
-    """
+    """Build the credit score dimension."""
     _validate_required_columns(
         dataframe=dataframe,
         required_columns=REQUIRED_CREDIT_SCORE_COLUMNS,
@@ -154,9 +186,7 @@ def build_credit_score_dimension(
 def build_date_dimension(
     dataframe: pd.DataFrame,
 ) -> pd.DataFrame:
-    """
-    Build the monthly date dimension.
-    """
+    """Build the monthly date dimension."""
     _validate_required_columns(
         dataframe=dataframe,
         required_columns=REQUIRED_DATE_COLUMNS,
@@ -170,9 +200,7 @@ def build_date_dimension(
         .copy()
     )
 
-    dimension["month"] = (
-        dimension["month"].astype(str)
-    )
+    dimension["month"] = dimension["month"].astype(str)
 
     unexpected_months = (
         set(dimension["month"])
