@@ -38,9 +38,9 @@ refactor: improve transformation logic
 ```
 
 ## Pull Request Flow
-1. Create a feature branch from develop.
-2. Implement the changes.
-3. Update documentation when needed.
-4. Run tests and checks.
-5. Open a Pull Request into develop.
-6. Merge into main only after the feature is stable.
+1. Create a feature branch from develop
+2. Implement the changes
+3. Update documentation when needed
+4. Run tests and checks
+5. Open a Pull Request into develop
+6. Merge into main only after the feature is stable
