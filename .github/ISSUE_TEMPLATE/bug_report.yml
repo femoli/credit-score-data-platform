@@ -1,0 +1,44 @@
+name: Bug report
+description: Report unexpected behavior in the data platform.
+title: "[Bug]: "
+labels:
+    - bug
+body:
+    - type: textarea
+      id: description
+      attributes:
+          label: Description
+          description: Describe the unexpected behavior.
+      validations:
+          required: true
+
+    - type: textarea
+      id: reproduction
+      attributes:
+          label: Steps to reproduce
+          description: Provide the commands and steps required to reproduce the issue.
+      validations:
+          required: true
+
+    - type: textarea
+      id: expected
+      attributes:
+          label: Expected behavior
+          description: Describe what should have happened.
+      validations:
+          required: true
+
+    - type: input
+      id: environment
+      attributes:
+          label: Environment
+          placeholder: Python 3.12, Ubuntu 24.04, WSL or Windows 11
+      validations:
+          required: true
+
+    - type: textarea
+      id: logs
+      attributes:
+          label: Relevant logs
+          description: Add logs or error messages when available.
+          render: shell

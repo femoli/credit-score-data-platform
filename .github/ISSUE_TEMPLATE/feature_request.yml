@@ -1,0 +1,40 @@
+name: Feature request
+description: Suggest an improvement for the data platform.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Describe the problem or limitation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe the expected implementation or behavior.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Project area
+      options:
+        - Ingestion
+        - Bronze layer
+        - Silver layer
+        - Gold layer
+        - Data quality
+        - Orchestration
+        - Cloud
+        - Observability
+        - Dashboard
+        - Documentation
+        - CI/CD
+    validations:
+      required: true
