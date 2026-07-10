@@ -2,7 +2,7 @@
 Gold layer loader.
 
 Reads Silver Parquet files, builds dimensional tables and fact table,
-then writes them to the Gold layer.
+validates the dimensional model, then writes datasets to the Gold layer.
 """
 
 from pathlib import Path
@@ -18,6 +18,7 @@ from src.processing.gold.dimensions import (
     build_occupation_dimension,
 )
 from src.processing.gold.facts import build_credit_profile_fact
+from src.processing.gold.validator import validate_gold_dataframes
 
 # =============================================================================
 # Constants
@@ -88,6 +89,15 @@ def load_parquet_to_gold(
         occupation_dimension=dimensions["dim_occupation"],
         credit_score_dimension=dimensions["dim_credit_score"],
         date_dimension=dimensions["dim_date"],
+    )
+
+    validate_gold_dataframes(
+        customer_dimension=dimensions["dim_customer"],
+        occupation_dimension=dimensions["dim_occupation"],
+        credit_score_dimension=dimensions["dim_credit_score"],
+        date_dimension=dimensions["dim_date"],
+        fact_dataframe=fact,
+        expected_row_count=len(dataframe),
     )
 
     output_directory = gold_data_path / parquet_file_path.stem
