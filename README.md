@@ -10,7 +10,8 @@
   <img src="https://img.shields.io/badge/Architecture-Medallion-blueviolet?style=for-the-badge" alt="Architecture">
   <img src="https://img.shields.io/badge/Status-In%20Development-orange?style=for-the-badge" alt="Status">
   <img src="https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/Tests-51%20Passing-success?style=for-the-badge&logo=pytest&logoColor=white" alt="Tests">
+  <img src="https://img.shields.io/badge/Tests-52%20Passing-success?style=for-the-badge&logo=pytest&logoColor=white" alt="Tests">
+
 </p>
 
 ---
@@ -64,7 +65,7 @@ Rather than focusing only on ETL scripts, this repository follows engineering be
 - Data Governance principles
 - Privacy-aware processing aligned with the Brazilian General Data Protection Law (LGPD)
 - Modular Python architecture
-- Unit Tests with Pytest
+- Unit and Integration Tests with Pytest
 - Docker-ready
 - Analytics-ready datasets
 - Professional project documentation
@@ -106,7 +107,7 @@ Rather than focusing only on ETL scripts, this repository follows engineering be
 
 **Overall Progress**
 
-`███████░░░░░░░` **68%**
+`████████░░░░░░` **72%**
 
 | Stage | Progress |
 | -------- | -------- |
@@ -115,7 +116,7 @@ Rather than focusing only on ETL scripts, this repository follows engineering be
 | Bronze Layer | ██████████ 100% |
 | Silver Layer | ██████████ 100% |
 | Gold Layer | ██████████ 100% |
-| Integration Tests | ███░░░░░░░ 25% |
+| Integration Tests | ██████████ 100% |
 | Docker | ░░░░░░░░░░ 0% |
 | CI/CD | ░░░░░░░░░░ 0% |
 | Documentation | ██████░░░░ 60% |
@@ -300,23 +301,61 @@ python -m src.processing.gold.gold_loader
 
 # ✅ Running Tests
 
-Execute all tests:
+The project includes unit and integration tests implemented with Pytest.
+
+## Testing Strategy
+
+| Test Type         | Purpose                                                                            |
+| ----------------- | ---------------------------------------------------------------------------------- |
+| Unit Tests        | Validate individual functions, transformations and data quality rules in isolation |
+| Integration Tests | Validate the complete Medallion pipeline from Raw ingestion to Gold datasets       |
+
+## Run all tests
 
 ```bash
 pytest
 ```
 
+## Run unit tests
+
+```bash
+pytest tests/unit -v
+```
+
+## Run integration tests
+
+```bash
+pytest tests/integration -v
+```
+
+## Run tests without integration tests
+
+```bash
+pytest -m "not integration" -v
+```
+
+The integration test executes the complete local data pipeline:
+
+```text
+Raw CSV → Bronze Parquet → Silver Parquet → Gold Datasets
+```
+
+The Kaggle dataset must be available in `data/raw/` before running the integration test.
+
+When the required raw files are unavailable, the integration test is skipped automatically.
+
 Example output:
 
 ```text
 =================================
-51 passed
+52 passed
 =================================
 ```
 
 <p align="right">
 <a href="#top">back to top ⬆️</a>
 </p>
+
 
 # 📚 Documentation
 
