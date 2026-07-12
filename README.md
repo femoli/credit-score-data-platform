@@ -9,8 +9,9 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Architecture-Medallion-blueviolet?style=for-the-badge" alt="Architecture">
   <img src="https://img.shields.io/badge/Status-In%20Development-orange?style=for-the-badge" alt="Status">
+  <img src="https://img.shields.io/badge/Release-v0.9.0--pre--release-6f42c1?style=for-the-badge" alt="Release">
   <img src="https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/Tests-52%20Passing-success?style=for-the-badge&logo=pytest&logoColor=white" alt="Tests">
+  <img src="https://img.shields.io/badge/Pytest-52%20Passing-success?style=for-the-badge&logo=pytest&logoColor=white" alt="Pytest">
 
 </p>
 
@@ -40,6 +41,7 @@ Rather than focusing only on ETL scripts, this repository follows engineering be
 - [✨ Highlights](#highlights)
 - [🏗 Architecture](#architecture)
 - [🧩 Data Model](#data-model)
+- [💼 Business Requirements](#business-requirements)
 - [🚀 Project Progress](#project-progress)
 - [📂 Project Structure](#project-structure)
 - [⚙️ Tech Stack](#tech-stack)
@@ -103,11 +105,26 @@ Rather than focusing only on ETL scripts, this repository follows engineering be
 <a href="#top">back to top ⬆️</a>
 </p>
 
+# 💼 Business Requirements
+
+This project was designed to address the main business requirements proposed in the Data Engineering Bootcamp.
+
+| Business Requirement | Current Solution |
+| -------------------- | ---------------- |
+| 🔄 **How can customer and financial data remain updated and available?** | The pipeline automatically downloads the latest dataset from Kaggle, applies standardized transformations, validates data quality, and generates analytics-ready datasets using the Medallion Architecture. |
+| ✅ **Which data quality validations are performed before data is consumed?** | The pipeline validates schema consistency, data types, mandatory fields, missing values, duplicate records, and domain consistency before promoting datasets to the next layer. |
+| 🔁 **How are periodic updates performed without creating duplicate records?** | The current implementation rebuilds each processing layer from the raw source, ensuring reproducible executions and preventing duplicate processed datasets. Workflow orchestration is planned for future releases. |
+| 📊 **How are datasets organized for analytics and predictive models?** | The Gold layer follows a Star Schema composed of fact and dimension tables stored in Parquet format, making the data ready for Business Intelligence and Machine Learning workloads. |
+
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
+
 # 🚀 Project Progress
 
 **Overall Progress**
 
-`████████░░░░░░` **72%**
+`██████████░░` **80%**
 
 | Stage | Progress |
 | -------- | -------- |
@@ -116,10 +133,12 @@ Rather than focusing only on ETL scripts, this repository follows engineering be
 | Bronze Layer | ██████████ 100% |
 | Silver Layer | ██████████ 100% |
 | Gold Layer | ██████████ 100% |
+| Unit Tests | ██████████ 100% |
 | Integration Tests | ██████████ 100% |
-| Docker | ░░░░░░░░░░ 0% |
-| CI/CD | ░░░░░░░░░░ 0% |
-| Documentation | ██████░░░░ 60% |
+| CI/CD | ██████████ 100% |
+| Documentation | ████████░░ 80% |
+| Cloud Storage (AWS S3) | ░░░░░░░░░░ 0% |
+| Pipeline Orchestration (Airflow) | ░░░░░░░░░░ 0% |
 
 <p align="right">
 <a href="#top">back to top ⬆️</a>
@@ -356,10 +375,23 @@ Example output:
 <a href="#top">back to top ⬆️</a>
 </p>
 
-
 # 📚 Documentation
 
-Detailed technical documentation is currently being prepared and will be available in the `docs/` directory in future iterations of the project.
+This repository contains the documentation required to understand, execute, and extend the project.
+
+The documentation currently includes:
+
+- Project overview
+- Architecture
+- Data model
+- Project structure
+- Setup instructions
+- Pipeline execution
+- Testing strategy
+- Business requirements
+- Architecture decisions
+
+Additional documentation covering cloud deployment and workflow orchestration will be added in future releases.
 
 <p align="right">
 <a href="#top">back to top ⬆️</a>
@@ -397,18 +429,18 @@ You can learn more about this incredible initiative [here](https://linktr.ee/Dat
 
 # 🚀 Future Improvements
 
-| Feature | Status |
-| ----------| ------ |
-| ⚙️ CI/CD with GitHub Actions | 🚧 In Progress |
-| 🐳 Docker containerization | 🚧 In Progress |
-| ☁️ AWS-native deployment | 🔍 Research |
-| 🌬️ Apache Airflow orchestration | 🔍 Research |
-| 📈 Monitoring & observability | 📝 Planned |
-| 📊 Business Intelligence dashboard | 📝 Planned |
-| ♿ Accessibility improvements | 📝 Planned |
-| 📚 Data catalog & metadata | 📝 Planned |
-| 🔍 Data lineage | 📝 Planned |
-| ✅ Automated data quality reports | 📝 Planned |
+The following features are planned for upcoming releases.
+
+| Release | Planned Feature |
+| -------- | --------------- |
+| **v1.0.0** | ☁️ AWS S3 integration |
+| **v1.0.0** | 🌬️ Apache Airflow orchestration |
+| **v1.0.0** | 📚 Complete technical documentation |
+| **v1.1.0** | 📊 Power BI dashboard |
+| **Future** | 📈 Monitoring & observability |
+| **Future** | 🗂️ Data catalog & metadata |
+| **Future** | 🔍 Data lineage |
+| **Future** | 🤖 Automated data quality reports |
 
 <p align="right">
 <a href="#top">back to top ⬆️</a>
