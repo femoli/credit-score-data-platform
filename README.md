@@ -175,12 +175,10 @@ gs://portfolio-credit-score-data-platform-dev/
 
 The upload preserves the local Medallion directory structure while keeping cloud credentials outside the repository.
 
-<p align="center">
-  <img src="docs/images/gcs-upload-execution.png" width="95%">
-</p>
-
-<p align="center">
-  <img src="docs/images/gcs-bucket-structure.png" width="95%">
+<p>
+  <img src="docs/images/gcs-upload-execution.png" alt="GCS Upload Execution" width="45%">
+  &nbsp;&nbsp;
+  <img src="docs/images/gcs-bucket-structure.png" alt="GCS Bucket Structure" width="45%">
 </p>
 
 <p align="right">
