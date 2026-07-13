@@ -120,6 +120,71 @@ This project was designed to address the main business requirements proposed in 
 <a href="#top">back to top ⬆️</a>
 </p>
 
+## ☁️ Cloud Storage
+
+The analytics-ready Gold datasets are stored in a private Google Cloud
+Storage bucket.
+
+```text
+gs://portfolio-credit-score-data-platform-dev/
+└── credit-score-data-platform/
+    └── gold/
+        └── train/
+            ├── dim_credit_score.parquet
+            ├── dim_customer.parquet
+            ├── dim_date.parquet
+            ├── dim_occupation.parquet
+            └── fact_credit_profile.parquet
+```
+
+### Local Authentication
+
+Authenticate using the Google Cloud CLI:
+
+```bash
+gcloud auth application-default login
+gcloud config set project credit-score-data-platform
+```
+
+Create your local environment file:
+
+```bash
+cp .env.example .env
+```
+
+Configure:
+
+```dotenv
+GCP_PROJECT_ID=credit-score-data-platform
+GCS_BUCKET_NAME=portfolio-credit-score-data-platform-dev
+GCS_PREFIX=credit-score-data-platform
+```
+
+### Upload Gold datasets
+
+```bash
+python -m src.storage.gcs_uploader
+```
+
+### Verify uploaded objects
+
+```bash
+gcloud storage ls --recursive \
+gs://portfolio-credit-score-data-platform-dev/
+```
+
+The upload preserves the local Medallion directory structure while keeping cloud credentials outside the repository.
+
+<p>
+  <img src="docs/images/gcs-upload-execution.png" alt="GCS Upload Execution" width="45%">
+  &nbsp;&nbsp;
+  <img src="docs/images/gcs-bucket-structure.png" alt="GCS Bucket Structure" width="45%">
+</p>
+
+<p align="right">
+<a href="#top">back to top ⬆️</a>
+</p>
+
 # 🚀 Project Progress
 
 **Overall Progress**
@@ -137,7 +202,7 @@ This project was designed to address the main business requirements proposed in 
 | Integration Tests | ██████████ 100% |
 | CI/CD | ██████████ 100% |
 | Documentation | ████████░░ 80% |
-| Cloud Storage (AWS S3) | ░░░░░░░░░░ 0% |
+| Cloud Storage (Google Cloud Storage) | ██████████ 100% |
 | Pipeline Orchestration (Airflow) | ░░░░░░░░░░ 0% |
 
 <p align="right">
@@ -213,6 +278,8 @@ credit-score-data-platform/
 - 📥 **Kaggle API** — Dataset ingestion
 - 📝 **Python Logging** — Logging and observability
 - 🗂️ **Parquet** — Columnar storage format
+- ☁️ **Google Cloud CLI** — Local authentication and cloud management
+- 🔐 **Application Default Credentials** — Secure local authentication without committed keys
 - 🌿 **Git & GitHub** — Version control and collaboration
 - 🏗️ **Medallion Architecture** — Data platform architecture pattern
 
@@ -314,6 +381,12 @@ python -m src.processing.silver.silver_loader
 python -m src.processing.gold.gold_loader
 ```
 
+## 5. Upload Gold datasets to Google Cloud Storage
+
+```bash
+python -m src.storage.gcs_uploader
+```
+
 <p align="right">
 <a href="#top">back to top ⬆️</a>
 </p>
@@ -387,11 +460,12 @@ The documentation currently includes:
 - Project structure
 - Setup instructions
 - Pipeline execution
+- Cloud Storage integration
 - Testing strategy
 - Business requirements
 - Architecture decisions
 
-Additional documentation covering cloud deployment and workflow orchestration will be added in future releases.
+Workflow orchestration with Apache Airflow will be documented in the next release.
 
 <p align="right">
 <a href="#top">back to top ⬆️</a>
@@ -432,11 +506,11 @@ You can learn more about this incredible initiative [here](https://linktr.ee/Dat
 The following features are planned for upcoming releases.
 
 | Release | Planned Feature |
-| -------- | --------------- |
-| **v1.0.0** | ☁️ AWS S3 integration |
+| -------- | --------------- |  
 | **v1.0.0** | 🌬️ Apache Airflow orchestration |
 | **v1.0.0** | 📚 Complete technical documentation |
 | **v1.1.0** | 📊 Power BI dashboard |
+| **Future** | ☁️ Multi-cloud storage support (AWS S3 / Azure Blob Storage) |
 | **Future** | 📈 Monitoring & observability |
 | **Future** | 🗂️ Data catalog & metadata |
 | **Future** | 🔍 Data lineage |
