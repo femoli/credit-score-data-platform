@@ -68,3 +68,20 @@ data/reports/*
 Thumbs.db
 .vscode/
 .idea/
+
+# =============================================================================
+# Airflow local environment
+# =============================================================================
+.venv-airflow/
+.airflow/
+
+# =============================================================================
+# Airflow runtime files
+# =============================================================================
+airflow.db
+airflow.db-shm
+airflow.db-wal
+airflow.cfg
+standalone_admin_password.txt
+simple_auth_manager_passwords.json.generated
+*.pid
