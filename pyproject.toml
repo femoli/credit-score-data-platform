@@ -1,0 +1,20 @@
+[project]
+name = "credit-score-data-platform"
+version = "0.1.0"
+description = "End-to-end data engineering platform for credit risk analytics."
+requires-python = ">=3.12,<3.13"
+
+[tool.black]
+line-length = 88
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra"
+markers = [
+    "integration: tests that validate interactions between pipeline components",
+]
